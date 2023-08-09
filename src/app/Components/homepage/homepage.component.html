@@ -1,0 +1,276 @@
+<div *ngIf="main_flag">
+
+  <!-- stock added to watchlist alert -->
+  <div class="container" style="margin-top: 3%;">
+    <div class="row">
+      <div id="watchlistAddedAlert">
+        <ngb-alert #staticAlertWatchlistAddedId *ngIf="!watchListAddedstaticAlertClosed" type="success" (closed)="watchListAddedstaticAlertClosed=true">
+          {{ticker}} added to the watchlist
+        </ngb-alert>
+     </div>
+    </div>
+  </div>
+  <!-- stock removed from watchlist alert -->
+  <div class="container">
+    <div class="row">
+      <div id="watchlistRemovedAlert">
+        <ngb-alert #staticAlertWatchlistRemovedId *ngIf="!watchListRemovedstaticAlertClosed" type="danger" (closed)="watchListRemovedstaticAlertClosed=true">
+          {{ticker}} removed from the watchlist
+        </ngb-alert>
+     </div>
+    </div>
+  </div>
+  <!-- stock bought alert -->
+    <div class="container">
+      <div class="row">
+        <div id="stockBoughtAlert">
+          <ngb-alert #staticAlertstockBoughtId *ngIf="!stockBoughtstaticAlertClosed" type="success" (closed)="stockBoughtstaticAlertClosed=true">
+            {{ticker}} bought successfully
+          </ngb-alert>
+        </div>
+      </div>
+    </div>
+  <!-- stock sold alert -->
+  <div class="container">
+      <div class="row">
+        <div id="stockSoldAlert">
+          <ngb-alert #staticAlertstockSoldId *ngIf="!stockSoldstaticAlertClosed" type="danger" (closed)="stockSoldstaticAlertClosed=true">
+            {{ticker}} sold successfully
+          </ngb-alert>
+        </div>
+      </div>
+    </div>
+
+
+
+<div
+  *ngIf="stockExistGlobalVariableHomepage"
+  class="d-flex justify-content-center"
+  id="homepageFirstBar"
+>
+  <!-- *ngIf="homePageLoaderVariableGlobal"   -->
+  <div *ngIf="loaderToAllData" id="homePageLoaderDiv">
+      <mat-spinner
+      diameter="80"
+      [mode]="'indeterminate'"
+      *ngIf="loaderToAllData" class="is-loading"
+    ></mat-spinner>
+  </div>
+
+
+
+        <!-- earlier code in div -->
+<!-- <mat-progress-spinner
+      diameter="80"
+      [mode]="'indeterminate'"
+      *ngIf="loaderFlagImage"
+    ></mat-progress-spinner> -->
+  <div *ngIf="invalidTicker" class="container">
+    <div class="row">
+      <div id="tickerInformEmptyEmptyAlert">
+        <ngb-alert [dismissible]="false">
+          Invalid stock ticker
+        </ngb-alert>
+     </div>
+    </div>
+  </div>
+  
+
+  <div class="container" id="homepagecontainer_">
+    <div class="row" id="rowhome">
+      <div class="col" id="homepagecontainer_col1_">
+        <div class="row" id="tickerAndStarRow">
+          <div id="tickerRow">
+            {{ ticker }}
+          </div>
+            
+          <div *ngIf="!flagForWatchlistStarIcon">
+            <button class="btn" (click)="addToWatchlist()" style="cursor: pointer">
+              <i class="fa-regular fa-star" id="emptyStar"></i>
+            </button>
+          </div>  
+          <div *ngIf="flagForWatchlistStarIcon">
+            <button class="btn" (click)="removeFromWatchlist()" style="cursor: pointer">
+              <i class="fa-solid fa-star" id="filledStar"></i>
+            </button>
+          </div>
+        </div>
+        <div class="row" id="companyNameRow">
+          {{ companyname }}
+        </div>
+        <div class="row" id="exchangeNameRow">
+          {{ exchange_ }}
+        </div>
+        <div class="row" id="buyAndSellButton">
+          <div id="buyButtonDiv">
+            <button class="btn btn-primary" (click)="openBuyStockModal()" data-toggle="modal" data-target="#buyModal" id="buyButton" type="submit">
+              Buy
+            </button>
+          </div>
+          <div *ngIf="sellButtonVisible" id="sellButtonDiv">
+            <button class="btn btn-primary"  (click)="openSellStockModal()" data-toggle="modal" data-target="#sellModal"  id="sellButton" type="submit">
+              Sell
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="logourl" class="col" id="homepagecontainer_col2_">
+        <img [src]="logourl" class="img-fluid" alt="not available" id="logoimg_" />
+      </div>
+
+      <div class="col" id="homepagecontainer_col3_">
+        <!-- Ajinkya -->
+
+        <div *ngIf="lastPriceFlag" class="row" [style.color]="temp_color" id="changeRow">
+          {{ last_price }}
+        </div>
+        <div class="row" [style.color]="temp_color" id="changePercentRow">
+          <div *ngIf="greenCarrotEnable" id="carrotUpGreen">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="green"
+              class="bi bi-caret-up-fill"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"
+              />
+            </svg>
+          </div>
+          <div *ngIf="redCarrotEnable" id="carrotDownRed">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="red"
+              class="bi bi-caret-down-fill"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"
+              />
+            </svg>
+          </div>
+
+          {{ change }} ({{ percent_change }}%)
+        </div>
+        <div class="row" id="timestampRow">
+          {{ currentLATime | date: "yyyy-MM-dd H:mm:ss":"-0700"  }}
+        </div>
+      </div>
+    </div>
+    <!-- <div *ngIf="isMarketOpen" class="row marketOpen">
+        Markes is open
+    </div>
+    <div *ngIf="!isMarketOpen" class="row marketClose">
+        Market is closed on {{date_time_converted}}
+    </div> -->
+    <div *ngIf="isMarketOpen" class="marketOpen">
+        Markes is open
+    </div>
+    <div *ngIf="!isMarketOpen" class="marketClose">
+        Market is closed on {{date_time_converted}}
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+
+<app-all-tabs *ngIf="stockExistGlobalVariableHomepage"></app-all-tabs>
+
+<!-- Buy stock modal -->
+<div id="buyModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- modal header -->
+      <div class="modal-header">
+        <!-- close button -->
+        <h4>{{ticker}}</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" >
+          &times;
+        </button>
+        <!-- /close button -->
+      </div>
+      <!-- /modal header -->
+      
+      <!-- modal body -->
+      <div class="modal-body">
+       Current Price:{{last_price}}
+       <br>
+       Money in Wallet: {{remainingWallet}}
+       <br>
+       Quantity <input type="number" min="0"  value="0" (change)="onStockQuantChangeBuy($event)" id="buyQuantityInput" style="width: 11%;" value="0">
+      <br>
+      <span *ngIf="warningStockAmountExceeded" style="color: red;">
+        Not enough money in wallet.
+      </span>
+      </div>
+      
+      <!-- /modal body -->
+      
+      <!-- modal footer -->
+
+      <div class="modal-footer">
+        <div class="totalAdjustModal" >Total: {{totalPriceStockToBuy}}</div>
+        
+        <button class="btn btn-primary" data-dismiss="modal" (click)="buyStock()" id="buyButtonModal" type="submit">
+          Buy
+        </button>
+      </div>
+
+      <!-- modal footer -->
+    </div>
+  </div>
+</div>
+
+
+<!-- Sell stock modal -->
+
+<div id="sellModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- modal header -->
+      <div class="modal-header">
+        <!-- close button -->
+        <h4>{{ticker}}</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+        <!-- /close button -->
+      </div>
+      
+      
+      <!-- modal body -->
+      <div class="modal-body">
+       Current Price:{{last_price}}
+       <br>
+       Money in Wallet: {{remainingWallet}}
+       <br>
+       Quantity <input type="number" min="0"  value="0" (change)="onStockQuantChangeSell($event)" id="sellQuantityInput" style="width: 11%;" value="0">
+      </div>
+      <span *ngIf="warningStockToSellNotAvailable" style="color: red;">
+        You cannot sell stocks that you don't own.
+      </span>
+      
+     
+      
+      <!-- modal footer -->
+
+      <div class="modal-footer">
+        <div class="totalAdjustModal">Total: {{totalPriceStockToSellForHTML}}</div>
+        
+        <button class="btn btn-primary" data-dismiss="modal" (click)="sellStock()" id="sellButtonModal" type="submit">
+          Sell
+        </button>
+      </div>
+
+      <!-- modal footer -->
+    </div>
+  </div>
+</div>

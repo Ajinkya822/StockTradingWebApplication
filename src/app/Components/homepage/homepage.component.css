@@ -1,0 +1,250 @@
+#rowhome {
+  margin: auto;
+}
+#homePageLoaderDiv {
+  z-index: 2000;
+  /* margin-left: 40%; */
+  position: absolute;
+  margin:auto;
+  margin-top: 5%;
+  
+}
+#homepagecontainer_ {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  /* margin-top: 5%; */
+  margin-top: 0%;
+}
+#homepagecontainer_col1_ {
+  width: 35%;
+  text-align: left;
+}
+
+#homepagecontainer_col3_ {
+  width: 35%;
+  text-align: right;
+  display: inline;
+}
+
+#tickerAndStarRow {
+  font-size: 185%;
+}
+#companyNameRow {
+  font-size: 125%;
+  margin-top: 2%;
+  color: #808080;
+}
+#exchangeNameRow {
+  font-size: 75%;
+  margin-top: 1%;
+}
+#homepagecontainer_col2_ img {
+  margin: auto;
+  display: block;
+  padding-top: 4%;
+  /* height: 6vh;
+  width: 8vw; */
+  height: 79%;
+  width: 37%;
+}
+#tickerRow {
+  padding-top: 3%;
+}
+
+#filledStar {
+  font-size: 18px;
+  padding-left: 4%;
+  color: #ffc40c;
+}
+
+#emptyStar{
+  font-size: 18px;
+  padding-left: 4%;
+  /* color: white; */
+  border-color: black;
+}
+
+#buyButton {
+  background-color: #4cbb17;
+  border-color: #4cbb17;
+}
+
+#sellButton {
+  background-color: red;
+  border-color: red;
+}
+
+#buyButtonModal {
+  background-color: #4cbb17;
+  border-color: #4cbb17;
+}
+
+#sellButtonModal {
+  background-color: red;
+  border-color: red;
+}
+
+#buyAndSellButton {
+  margin-top: 2%;
+}
+#sellButtonDiv {
+  margin-left: 2%;
+}
+#changeRow {
+  text-align: right;
+  padding-top: 7%;
+  font-size: 28px;
+  display: block;
+}
+#changePercentRow {
+  text-align: right;
+  font-size: 20px;
+  padding-top: 4%;
+  display: block;
+}
+#timestampRow {
+  text-align: right;
+  font-size: 14px;
+  padding-top: 2%;
+  display: block;
+  color: #808080;
+}
+#carrotUpGreen {
+  display: inline;
+}
+#carrotDownRed {
+  display: inline;
+}
+
+#watchlistAddedAlert{
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  /* height: 10%; */
+  font-size: 12px;
+  text-align: center;
+  margin-top: 2%;
+}
+
+#watchlistRemovedAlert{
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  /* height: 10%; */
+  font-size: 12px;
+  text-align: center;
+}
+#stockBoughtAlert{
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  /* height: 10%; */
+  font-size: 12px;
+  text-align: center;
+}
+
+#stockSoldAlert{
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  /* height: 10%; */
+  font-size: 12px;
+  text-align: center;
+}
+
+.marketOpen{
+  color: #4cbb17;
+  text-align: center;
+  margin-top: 2%;
+  font-weight: 500;
+}
+
+
+.marketClose{
+  color: red;
+  text-align: center;
+  margin-top: 2%;
+  font-weight: 500;
+}
+
+.totalAdjustModal{
+  width: 85%;
+}
+
+@media only screen and (max-width: 500px) {
+  #homepageFirstBar{
+    margin-top: 12%;
+  }
+  #tickerRow {
+    font-size: 21px;
+    padding-top: 7%;
+    
+  }
+  #companyNameRow {
+    font-size: 15px;
+    margin-top: 2%;
+  }
+  #changeRow {
+  padding-top: 10%;
+  font-size: 25px;
+  }
+  #buyAndSellButton {
+    width: 240%;
+  }
+  #sellButtonDiv {
+    margin-left: 7%;
+  }
+  #homepagecontainer_ {
+    width: 90%;
+  
+  }
+  #homepagecontainer_col2_ img {
+    height: 51%;
+    width: 100%;
+  }
+  .marketClose{
+    margin-top: 5%;
+  }
+  .totalAdjustModal{
+    width: 78%;
+  }
+
+  #watchlistAddedAlert{
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  /* height: 10%; */
+  font-size: 12px;
+  text-align: center;
+  margin-top: 2%;
+}
+
+#watchlistRemovedAlert{
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  /* height: 10%; */
+  font-size: 12px;
+  text-align: center;
+}
+#stockBoughtAlert{
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  /* height: 10%; */
+  font-size: 12px;
+  text-align: center;
+}
+
+#stockSoldAlert{
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  /* height: 10%; */
+  font-size: 12px;
+  text-align: center;
+}
+
+
+}

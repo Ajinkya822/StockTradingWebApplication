@@ -1,0 +1,9 @@
+{
+  "/api": {
+    
+    "target": "http://ajinkyanode303.wl.r.appspot.com:3000/",
+      
+
+    "secure": false
+  }
+}

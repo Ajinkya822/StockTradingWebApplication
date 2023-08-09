@@ -1,0 +1,74 @@
+<div class="col-sm-10 mx-auto" id="watchlistTitle">My Watchlist</div>
+
+<!-- Alert if watchlist is empty -->
+
+<div *ngIf="watchListEmpty" class="container">
+    <div class="row">
+      <div id="watchlistEmptyAlert">
+        <ngb-alert [dismissible]="false">
+          Currently you don't have any stock in your watchlist.
+        </ngb-alert>
+     </div>
+    </div>
+  </div>
+ <!-- Alert if stock is removed from watchlist window -->
+  <div class="container">
+    <div class="row">
+      <div id="watchlistRemovedAlert">
+        <ngb-alert #staticAlertWatchlistRemovedId *ngIf="!watchListRemovedstaticAlertClosed" type="danger" (closed)="watchListRemovedstaticAlertClosed=true">
+          {{ticketToRemove}} removed from the watchlist
+        </ngb-alert>
+     </div>
+    </div>
+  </div>
+
+
+<div class="col-sm-10 mx-auto">
+  <div *ngFor="let item of watchListTickerArray; index as i">
+    <div class="card" id="watchlistCard" >
+      <div class="card-header border-0" style="background-color: white;">
+        <div class="float-right" >
+          <button type="button" style="margin-top: -41%; margin-right: -103%; z-index: 130;" class="close" (click)="removeFromWatchlist(i)" >
+            &times;
+          </button>
+        </div>
+      </div>
+      
+      <div class="card-body" style="margin-top: -3%;" (click)="navigateToStockFromWatchlist(watchListTickerArray[i])">
+        <div class="float-left">
+            <div style="font-size: 24px;">
+              {{ watchListTickerArray[i] }}
+            </div>
+            <div style="font-size: 13px; margin-top: 10%;">
+              {{watchListCompanyNamesArray[i]}}
+            </div>
+        </div>
+        
+          <div class="float-right" [style.color]="priceChange_color[i]" style="font-size: 24px;">
+            {{watchListCurrentPriceArray[i]}}
+          </div>
+          <br>
+          <div class="float-right" [style.color]="priceChange_color[i]" style="font-size: 13px; margin-top: 1%;">
+           <div *ngIf="greenCarrotEnable[i]" id="carrotUpGreen" style="display: inline-block;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+              <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+            </svg>
+          </div>
+          <div *ngIf="redCarrotEnable[i]" id="carrotDownRed" style="display: inline-block;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+              <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+            </svg>
+          </div >
+            <div style="display: inline-block;">
+                {{watchListPriceChangeArray[i]}} ({{watchListPerecentChangeArray[i]}}%)
+            </div>
+            
+          </div>
+          
+        
+        
+        
+      </div>
+    </div>
+  </div>
+</div>

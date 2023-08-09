@@ -1,0 +1,123 @@
+/* #titlemainpage {
+  height: auto;
+  margin-top: 4%;
+} */
+/* mat-progress-spinner {
+} */
+h1 {
+    font-size: 37px;
+    font-weight: 500;
+}
+
+#header-text {
+    margin-top: 4%;
+    /* margin-bottom: 50px; */
+}
+
+#group-outer {
+    border: 3px solid rgb(104, 88, 242);
+    height: 100%;
+    width: 33%;
+    margin-top: 1%;
+}
+form {
+    width: 100%;
+    height: 30px;
+}
+
+input[type="text"] {
+    outline: none;
+    box-shadow: none;
+    font-size: 15px;
+    height: 32px;
+    border:none;
+    
+}
+#mat-form-field-infix{
+  border-top: none;
+}
+
+::ng-deep .mat-form-field-underline {
+    display: none;
+}
+
+#stockInvalidAlert{
+    width: 100%;
+    text-align: center;
+    margin-top: 8%;
+}
+
+#tickerInformEmptyAlert{
+    width: 100%;
+    text-align: center;
+    margin-top: 8%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#group-outer {
+    border: 2px solid rgb(104, 88, 242);
+    height: 100%;
+    width: 30%; 
+    margin:auto; 
+    height: 125%; 
+    margin-top: 1%;
+}
+
+
+
+
+/* form {
+    width: 180px;
+    height: 30px;
+} */
+
+div button {
+    outline: none;
+    box-shadow: none;
+}
+
+/* search icon color */
+path {
+    fill: rgb(104, 88, 242);
+}
+
+@media only screen and (max-width: 500px) {
+  #group-outer{
+    width: 75%;
+    
+  }
+  #header-text {
+    margin-top: 10%;
+    /* margin-bottom: 50px; */
+}
+
+#stockInvalidAlert{
+    width: 80%;
+    text-align: center;
+    margin-top: 12%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+#tickerInformEmptyAlert{
+    width: 80%;
+    text-align: center;
+    margin-top: 12%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+}
+
+
+

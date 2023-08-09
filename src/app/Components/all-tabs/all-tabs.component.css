@@ -1,0 +1,126 @@
+#allTabsDiv {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  margin-top: 3%;
+}
+#SummaryTabPriceDetails {
+  margin-left: 8%;
+  margin-top: 4%;
+}
+#aboutTheCompanyLabel {
+  margin-top: 6%;
+  text-align: center;
+  font-weight: 400;
+  font-size: 18px;
+}
+#aboutTheCompanyDetails {
+  margin-top: 4%;
+  margin-left: 5%;
+}
+#newsCard {
+  margin-left: 2%;
+  margin-top: 2%;
+  /* width: 100%;
+  max-height: 13vh; */
+  cursor: pointer; 
+}
+#newsCard2 {
+  margin-left: 2%;
+  margin-top: 3%;
+  width: 100%;
+  max-height: 13vh;
+  cursor: pointer;
+}
+#tabTopNewsParentRow {
+  margin-top: 2%;
+}
+/* #tabTopNewsLeftCol {
+  margin-left: 1%;
+   display: inline-block; 
+}
+#tabTopNewsRightCol {
+  margin-left: 1%;
+   display: inline-block; 
+}   */
+.card {
+  flex-direction: row;
+  /* align-items: center; */
+}
+.card img {
+  width: 19%;
+  margin: 3%;
+  height: 5vh;
+}
+.col-5 {
+  max-width: 46.6%;
+  flex: 0 0 46.6%;
+  margin-left: 2%;
+  margin-top: 2%;
+}
+.card-body {
+  font-size: 13px;
+}
+
+th,td {
+width: 1%;
+  
+}
+
+#highLowPriceSection{
+  margin-top: 8%;
+  margin-left: 12%;
+}
+.table{
+  width: 70%; 
+  margin:auto;
+  margin-top: 2%; 
+  text-align: center
+}
+
+#mobileMarginForChart{
+  margin-top: 4%;
+}
+
+@media only screen and (max-width: 500px) {
+  #highLowPriceSection{
+    width: 50%;
+    margin: auto;
+    margin-top: 6%;
+  }
+  .newsCardMobile{
+    width: 90%;
+  }
+  .card{
+    flex-direction: column ;
+    max-width: 90%;
+    flex: 0 0 90%;
+    margin-left: 5%;
+    margin-top: 4%;
+  }
+  .card img{
+    width: 93%;
+    margin: 3%;
+    height: 17vh;
+  }
+  .card-body{
+    padding-left: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+  
+  #cardBodyForMobile1{
+    padding-top: 0px;
+  }
+
+  #cardBodyForMobile2{
+    padding-top: 0px;
+  }
+  .table{
+    width: 90%;
+    margin-top: 4%;
+  }
+  #mobileMarginForChart{
+    margin-top: 5%;
+  }
+
+}

@@ -1,0 +1,201 @@
+<!-- stock bought alert -->
+    <div class="container">
+      <div class="row">
+        <div id="stockBoughtAlert">
+          <ngb-alert #staticAlertstockBoughtId *ngIf="!stockBoughtstaticAlertClosed" type="success" (closed)="stockBoughtstaticAlertClosed=true">
+            {{stockTickerBought}} bought successfully
+          </ngb-alert>
+        </div>
+      </div>
+    </div>
+  <!-- stock sold alert -->
+  <div class="container">
+      <div class="row">
+        <div id="stockSoldAlert">
+          <ngb-alert #staticAlertstockSoldId *ngIf="!stockSoldstaticAlertClosed" type="danger" (closed)="stockSoldstaticAlertClosed=true">
+            {{stockTickerSold}} sold successfully
+          </ngb-alert>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+<div class="col-sm-10 mx-auto" id="portfolioTitle">My Portfolio</div>
+
+<div class="col-sm-10 mx-auto" id="portfolioMoneyInWallet">Money in Wallet: ${{totalMoneyWallet}}</div>
+
+<div *ngIf="portfolioEmpty" class="container">
+    <div class="row">
+      <div id="portfolioEmptyAlert">
+        <ngb-alert [dismissible]="false">
+          Portfolio is empty
+        </ngb-alert>
+     </div>
+    </div>
+  </div>
+
+<div class="col-sm-10 mx-auto">
+  <div *ngFor="let item of portfolioTickerArray; index as i">
+    <div class="card" id="portfolioCard">
+        <div class="card-header">
+           <span style="font-size: 22px;">{{portfolioTickerArray[i] }}</span>  
+           <span style="color: #909090; margin-left: 1%;">{{portfolioCompanyNameArray[i]}}</span>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-6">
+                <span style="font-size: 18px;font-weight: 100;">Quantity:</span>
+                <span style="float:right; font-size: 18px; font-weight: 100;">{{portfolioStockQuantArray[i]}}</span>
+                <br>
+                <span style="font-size: 18px;font-weight: 100;">Avg.Cost/Share:</span>
+                
+                <span style="float: right;font-size: 18px; font-weight: 100;">{{portfolioAvgCostArray[i]}}</span>
+                 <br>
+                <span style="font-size: 18px;font-weight: 100;">Total Cost:</span>
+                 
+                <span style="float: right;font-size: 18px; font-weight: 100;">{{portfolioTotalCostArray[i]}}</span>
+                
+            </div>
+            <div class="col-sm-6">
+                <span style="font-size: 18px;font-weight: 100;">Change:</span>
+                
+                <span [style.color]="priceChange_color[i]" style="float: right;font-size: 18px; font-weight: 100;">{{portfolioChangeArray[i]}}</span>
+                <div *ngIf="greenCarrotEnable[i]" id="carrotUpGreen" style="display: inline-block; float: right;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="green" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                      <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                    </svg>
+                  </div>
+                <div *ngIf="redCarrotEnable[i]" id="carrotDownRed" style="display: inline-block; float: right;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                  </svg>
+                </div >
+                <br>
+                <span style="font-size: 18px;font-weight: 100;">Current Price:</span>
+                 
+                <span [style.color]="priceChange_color[i]" style="float: right;font-size: 18px; font-weight: 100;">{{portfolioCurrentPriceArray[i]}}</span>
+                 <br>
+                <span style="font-size: 18px;font-weight: 100;">Market Value:</span>
+                 
+                <span [style.color]="priceChange_color[i]" style="float: right;font-size: 18px; font-weight: 100;">{{portfolioMarketValueArray[i]}}</span>
+                
+            </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row" id="buyAndSellButton">
+                <div id="buyButtonDiv">
+                    <button class="btn btn-primary"  (click)="openBuyStockModal(i)" data-toggle="modal" data-target="#buyModal" id="buyButton" type="submit">
+                        Buy
+                    </button>
+                </div>
+                <div id="sellButtonDiv">
+                    <button class="btn btn-primary" (click)="openSellStockModal(i)" data-toggle="modal" data-target="#sellModal" id="sellButton" type="submit">
+                        Sell
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Buy stock modal -->
+<div id="buyModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- modal header -->
+      <div class="modal-header">
+        <!-- close button -->
+        <!-- <h4>{{ticker}}</h4> -->
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+        <!-- /close button -->
+      </div>
+      <!-- /modal header -->
+      
+      <!-- modal body -->
+      <div class="modal-body">
+       Current Price:{{globalCurrentPrice}}
+       <br>
+       Money in Wallet: {{remainingWallet}}
+       <br>
+       Quantity <input type="number" min="0"  value="0" (change)="onStockQuantChangeBuy($event)" id="buyQuantityInput" style="width: 11%;" value="0">
+       <br>
+      <span *ngIf="warningStockAmountExceeded" style="color: red;">
+        Not enough money in wallet.
+      </span>
+      </div>
+      
+      <!-- /modal body -->
+      
+      <!-- modal footer -->
+
+      <div class="modal-footer">
+        <div class="totalAdjustModal">
+          Total: {{totalPriceStockToBuy}}
+        </div>
+        
+        <button class="btn btn-primary" data-dismiss="modal" (click)="buyStock()" id="buyButtonModalPortfolio" type="submit">
+          Buy
+        </button>
+      </div>
+
+      <!-- modal footer -->
+    </div>
+  </div>
+</div>
+
+
+<!-- Sell stock modal -->
+
+<div id="sellModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- modal header -->
+      <div class="modal-header">
+        <!-- close button -->
+        <!-- <h4>{{ticker}}</h4> -->
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+        <!-- /close button -->
+      </div>
+      
+      
+      <!-- modal body -->
+      <div class="modal-body">
+       Current Price:{{globalCurrentPrice}}
+       <br>
+       Money in Wallet: {{remainingWallet}}
+       <br>
+       Quantity <input type="number" min="0"  value="0" (change)="onStockQuantChangeSell($event)" id="sellQuantityInput" style="width: 11%;" value="0">
+      </div>
+      <span *ngIf="warningStockToSellNotAvailable" style="color: red;">
+        You cannot sell stocks that you don't own.
+      </span>
+      
+     
+      
+      <!-- modal footer -->
+
+      <div class="modal-footer">
+        <div class="totalAdjustModal">
+          Total: {{totalPriceStockToSell}}
+        </div>
+        
+        <button class="btn btn-primary" data-dismiss="modal" (click)="sellStock()" id="sellButtonModalPortfolio" type="submit">
+          Sell
+        </button>
+      </div>
+
+      <!-- modal footer -->
+    </div>
+  </div>
+</div>

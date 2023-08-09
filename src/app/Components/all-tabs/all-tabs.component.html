@@ -1,0 +1,275 @@
+<div id="allTabsDiv">
+  <mat-tab-group mat-stretch-tabs dynamicHeight>
+    <mat-tab label="Summary">
+      <ng-template matTabContent>
+              <div class="row">
+        <div class="col-md-6" id="summaryLeftCol">
+          <div class="col-md-12" id="highLowPriceSection">
+              <div style="line-height: 180%;">
+                <span style="font-weight: bold">High Price: </span><span style="color: #808080;">{{ highPrice }}</span><br>
+              </div>
+              <div style="line-height: 180%;">
+                <span style="font-weight: bold">Low Price: </span><span style="color: #808080;">{{ lowPrice }}</span> <br>
+              </div>
+              <div style="line-height: 180%;">
+                <span style="font-weight: bold">Open Price: </span><span style="color: #808080;">{{ openPrice }}</span><br>
+              </div>
+              <div style="line-height: 180%;">
+                <span style="font-weight: bold">Prev. Close: </span><span style="color: #808080;">{{ prevClose }}</span><br>
+              </div>
+              
+          </div>
+          <div class="col-md-12" id="aboutTheCompanySection">
+              <div id="aboutTheCompanyLabel">
+                <u>About the company</u>
+              </div>
+              <div style="margin-top: 6%; line-height: 180%;">
+                <span style="font-weight: bold">IPO Start Date: </span><span style="color: #808080;">{{ ipoStartDate }}</span>
+              </div>
+              <div style="line-height: 180%;">
+                <span style="font-weight: bold">Industry: </span><span style="color: #808080;">{{ industry }}</span> 
+              </div>
+              <div style="line-height: 180%;">
+                <span style="font-weight: bold">Webpage:</span>
+                <a [href]="webpage" target="_blank"> {{ webpage }}</a>
+              </div>
+              <div style="line-height: 180%;">
+                <span style="font-weight: bold">Company peers:</span>
+                <div>
+                  <span *ngFor="let item of companyPeersArray">
+                    <!-- <a href="http://localhost:4200/#/search/{{item}}">{{ item }},</a> -->
+                    <!-- <a [routerLink]="['/search/NOW']">{{ item }},</a> -->
+                    <!-- <a [routerLink]="['/search', item]" style="cursor: pointer">{{ item }},</a> -->
+                    <!-- <a (click)="listenToMe(item);">{{ item }},</a> -->
+                    <a [routerLink]="getPeer(item)">{{ item }},</a>
+  
+                  </span>
+                </div>
+              </div>
+          </div>  
+        </div>
+        <div class="col-md-6" id="summaryRightHalfCol">
+            <app-historical-first-tab></app-historical-first-tab>
+        </div>
+        
+        
+        
+        <!-- <div class="col" id="summaryLeftTabCol">
+          <div  id="summaryLeftHalf">
+            <div id="SummaryTabPriceDetails">
+              <div>
+                <span style="font-weight: bold">High Price:</span>
+                {{ highPrice }}
+              </div>
+
+              <div>
+                <span style="font-weight: bold">Low Price:</span> {{ lowPrice }}
+              </div>
+
+              <div>
+                <span style="font-weight: bold">Open Price:</span>
+                {{ openPrice }}
+              </div>
+
+              <div>
+                <span style="font-weight: bold">Prev. Close:</span>
+                {{ prevClose }}
+              </div>
+            </div>
+            <div id="aboutTheCompanyLabel"><u>About the company</u></div>
+            <div id="aboutTheCompanyDetails">
+              <div>
+                <span style="font-weight: bold">IPO Start Date:</span>
+                {{ ipoStartDate }}
+              </div>
+              <div>
+                <span style="font-weight: bold">Industry:</span> {{ industry }}
+              </div>
+              <div>
+                <span style="font-weight: bold">Webpage:</span>
+                <a [href]="webpage" target="_blank"> {{ webpage }}</a>
+              </div>
+              <div>
+                <span style="font-weight: bold">Company peers:</span>
+                <div>
+                  <span *ngFor="let item of companyPeersArray">
+                    <a href="http://localhost:4200/search/{{item}}">{{ item }}, </a>  
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <!-- <div class="col" id="summaryRightHalfCol">
+          <div id="summaryRightHalf">
+            Hello
+            <app-historical-first-tab></app-historical-first-tab>
+          </div>
+        </div> -->
+      </div>
+      </ng-template>
+
+    </mat-tab>
+
+    <!--*************** NEWS TAB*************** -->
+    <mat-tab label="Top News">
+      <div id="tabTopNewsParentRow">
+        <div *ngFor="let item of temp_newsleftImage; index as i">
+            <div *ngIf="i%2==0" class="row">
+              <div class="col-5 card" style="cursor: pointer;" data-toggle="modal" data-target="#GSCCModal"  (click)="openModalLeft(i)" id="newsCardMobile" >
+                  <img [src]="item" class="card-img-top" alt="..." />
+                  <div class="card-body" id="cardBodyForMobile1">{{ temp_newsleftHeadline[i] }}</div>
+              </div>
+              <div *ngIf="i+1<temp_newsleftImage.length" style="cursor: pointer;" class="card col-5" data-toggle="modal" data-target="#GSCCModal" (click)="openModalRight(i+1)" id="newsCardMobile">
+                  <img [src]="temp_newsleftImage[i+1]" class="card-img-top" alt="..." />
+                  <div class="card-body" id="cardBodyForMobile2">{{ temp_newsleftHeadline[i+1] }}</div>
+              </div>
+              
+            </div>
+        </div>
+      </div>
+      
+    </mat-tab>
+
+
+
+    <!-- **************CHARTS THIRD TAB************* -->
+    <mat-tab label="Charts">
+      <ng-template matTabContent>
+        <app-historical-charts></app-historical-charts>
+      </ng-template>
+      
+    </mat-tab>
+    
+    <!-- ************INSIGHTS TAB FOURTH************* -->
+    
+    
+    <mat-tab label="Insights">
+        <ng-template matTabContent>
+          <div class="col-sm text-center" style="font-size: 25px; font-weight: 400; margin-top: 4%;">
+            Social Sentiments
+          </div>
+      
+
+      <table class="table" >
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">{{ tickerSubmittedValue }}</th>
+
+            <th scope="col">Reddit</th>
+
+            <th scope="col">Twitter</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <thead class="thead-light">
+              <th scope="row">Total Mentions</th>
+            </thead>
+
+            <td>{{ redditMention }}</td>
+            <td>{{ twitterMention }}</td>
+          </tr>
+          <tr>
+            <thead class="thead-light">
+              <th scope="row">Positive Mentions</th>
+            </thead>
+
+            <td>{{ redditPositiveMention }}</td>
+            <td>{{ twitterPositiveMention }}</td>
+          </tr>
+          <tr>
+            <thead class="thead-light">
+              <th scope="row">Negative Mentions</th>
+            </thead>
+
+            <td>{{ redditNegativeMention }}</td>
+            <td>{{ twitterNegativeMention }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="row" id="mobileMarginForChart">
+        <div class="col-md-6 col-xs-12">
+          <app-r-trends-chart></app-r-trends-chart>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <app-earning-chart></app-earning-chart>
+        </div>
+      </div>
+        </ng-template>
+
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
+
+<div
+  id="GSCCModal"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="height: 50%; padding-bottom: 0%;">
+        <h4>
+          <div class="modal-title" style="font-weight: bold; font-size: 20px;">
+            {{ modalNewsSource }}
+          </div>
+
+          <div style="color: #707070; font-weight: 500; font-size: 14px;">
+            {{ fulldateTime }}
+          </div>
+        </h4>
+
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <p style="font-weight: bold;font-size: 15px;margin-block-end: 0%;">
+          {{ modalNewsHeadline }}
+        </p>
+        <p style="font-weight: 300; font-size: 13px;">
+          {{ modalNewsSummary }}
+        </p>
+        <p style="font-size: 13px;font-weight: 100;">
+          For more details click
+          <a [href]="modalNewsUrl" target="_blank">here</a>
+        </p>
+      </div>
+      <!-- <div class="modal-footer"> -->
+        <span class="border" style="width: 90%;margin-left: 5%;margin-right: 5%;margin-top: 3%; margin-bottom: 5%; padding: 4%;">
+          <span>
+            Share
+          </span>
+          <br>
+          <!-- /// -->
+              <!-- <i class="fa-brands fa-facebook-square"></i> -->
+                <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text={{modalNewsHeadline}}%20{{modalNewsUrl}}" target="_blank" data-size="large">
+                  <i class="fa-brands fa-twitter fa-3x"  style="cursor: pointer;  margin-top: 2%;"></i>
+                </a>
+                <a class="facebook-share-button" href="https://www.facebook.com/sharer/sharer.php?u={{modalNewsUrl}}" target="_blank" data-size="large">
+                  <i class="fa-brands fa-facebook-square fa-3x"  style="cursor: pointer;  margin-top: 2%; margin-left: 2%;"></i>
+                </a>
+                <!-- <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text={{modalNewsHeadline}}%20{{modalNewsUrl}}" target="_blank" data-size="large">
+                  <i class="fa-brands fa-facebook-square fa-3x"  style="cursor: pointer;  margin-top: 2%;"></i>
+                </a> -->
+
+                
+                <!-- <iframe src="https://www.facebook.com/plugins/share_button.php?href={{temp_}}&layout=button_count&size=small&width=96&height=20&appId" width="96" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe> -->
+                <!-- <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="popup" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse&quote=here+comes+the+quote','popup','width=600,height=500'); return false;" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse&quote=here+comes+the+quote"></a></div> -->
+              
+          <!-- </button> -->
+          
+          
+        </span>
+        
+        
+      <!-- </div> -->
+    </div>
+  </div>
+</div>
